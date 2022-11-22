@@ -10,13 +10,13 @@
       1. Calculate the score as the total of the number of correct answers
 
       2. Add an Event listener for the submit button, which will display the score and highlight 
-         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.
+         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.^^
 
-      3. Add 2 more questions to the app (each question must have 4 options).
+      3. Add 2 more questions to the app (each question must have 4 options). ^^
 
-      4. Reload the page when the reset button is clicked (hint: search window.location)
+      4. Reload the page when the reset button is clicked (hint: search window.location)^^
 
-      5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
+      5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers^^
 *************************** */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +28,21 @@ window.addEventListener('DOMContentLoaded', () => {
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
+
+  // quiz timer
+  var sec = 60;
+  var interval = setInterval(function(){
+  document.getElementById('time').innerHTML=sec;
+  sec--;
+  if (sec === -1){
+    clearInterval(interval);
+    document.getElementById('time').innerHTML='0';
+    
+    alert("You're out of time!");
+  }
+}, 1000);
+
+// quiz array
   const quizArray = [
     {
       q: 'Which is the third planet from the sun?',
@@ -44,6 +59,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'What is the circumference of Earth at the equafor(in kilometers)?',
+      o: ['10000', '30000', '40000', '50000'],
+      a: 2, 
+    },
+    {
+      q: 'What is the name given to the imaginary line at latitude zero?',
+      o: ['the prime meridian', 'the Tropic of Cpricorn', 'the Tropic of Cancer', 'the equator'],
+      a: 3, 
+    }
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -76,15 +101,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          liElement.style.backgroundColor='green';
+          score = score + 1;
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          
+          
         }
-      }
+       }
     });
   };
-
+  
   // call the displayQuiz function
   displayQuiz();
 });
+document.getElementById("btnSubmit").addEventListener("click", function(){
+  document.getElementById('score').innerHTML=`Your Score is : ${score};`
+
+});
+ 
