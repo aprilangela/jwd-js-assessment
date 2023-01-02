@@ -19,11 +19,11 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers^^
 *************************** */
 
-window.addEventListener('DOMContentLoaded', () => {
-  const start = document.querySelector('#start');
-  start.addEventListener('click', function (e) {
-    document.querySelector('#quizBlock').style.display = 'block';
-    start.style.display = 'none';
+window.addEventListener("DOMContentLoaded", () => {
+  const start = document.querySelector("#start");
+  start.addEventListener("click", function (e) {
+    document.querySelector("#quizBlock").style.display = "block";
+    start.style.display = "none";
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -31,50 +31,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // quiz timer
   var sec = 60;
-  var interval = setInterval(function(){
-  document.getElementById('time').innerHTML=sec;
-  sec--;
-  if (sec === -1){
-    clearInterval(interval);
-    document.getElementById('time').innerHTML='0';
-    
-    alert("You're out of time!");
-  }
-}, 1000);
+  var interval = setInterval(function () {
+    document.getElementById("time").innerHTML = sec;
+    sec--;
+    if (sec === -1) {
+      clearInterval(interval);
+      document.getElementById("time").innerHTML = "0";
 
-// quiz array
+      alert("You're out of time!");
+    }
+  }, 1000);
+
+  // quiz array
   const quizArray = [
     {
-      q: 'Which is the third planet from the sun?',
-      o: ['Saturn', 'Earth', 'Pluto', 'Mars'],
+      q: "Which is the third planet from the sun?",
+      o: ["Saturn", "Earth", "Pluto", "Mars"],
       a: 1, // array index 1 - so Earth is the correct answer here
     },
     {
-      q: 'Which is the largest ocean on Earth?',
-      o: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+      q: "Which is the largest ocean on Earth?",
+      o: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
       a: 3,
     },
     {
-      q: 'What is the capital of Australia',
-      o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
+      q: "What is the capital of Australia",
+      o: ["Sydney", "Canberra", "Melbourne", "Perth"],
       a: 1,
     },
     {
-      q: 'What is the circumference of Earth at the equafor(in kilometers)?',
-      o: ['10000', '30000', '40000', '50000'],
-      a: 2, 
+      q: "What is the circumference of Earth at the equafor(in kilometers)?",
+      o: ["10000", "30000", "40000", "50000"],
+      a: 2,
     },
     {
-      q: 'What is the name given to the imaginary line at latitude zero?',
-      o: ['the prime meridian', 'the Tropic of Cpricorn', 'the Tropic of Cancer', 'the equator'],
-      a: 3, 
-    }
+      q: "What is the name given to the imaginary line at latitude zero?",
+      o: [
+        "the prime meridian",
+        "the Tropic of Cpricorn",
+        "the Tropic of Cancer",
+        "the equator",
+      ],
+      a: 3,
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
   const displayQuiz = () => {
-    const quizWrap = document.querySelector('#quizWrap');
-    let quizDisplay = '';
+    const quizWrap = document.querySelector("#quizWrap");
+    let quizDisplay = "";
     quizArray.map((quizItem, index) => {
       quizDisplay += `<ul class="list-group">
                    Q - ${quizItem.q}
@@ -96,29 +101,28 @@ window.addEventListener('DOMContentLoaded', () => {
         //highlight the li if it is the correct answer
         let li = `li_${index}_${i}`;
         let r = `radio_${index}_${i}`;
-        liElement = document.querySelector('#' + li);
-        radioElement = document.querySelector('#' + r);
+        liElement = document.querySelector("#" + li);
+        radioElement = document.querySelector("#" + r);
 
         if (quizItem.a == i) {
           //change background color of li element here
-          liElement.style.backgroundColor='green';
-          score = score + 1;
+         
+          liElement.style.backgroundColor = 'green';
+         
         }
 
-        if (radioElement.checked) {
+        if (radioElement.checked && i==a) {
           // code for task 1 goes here
-          
-          
+            score++;
         }
-       }
+      }
     });
+    const scoreElement = document.querySelector('#score');
+    scoreElement.innerHTML = `Your score is ${score} points`;
   };
-  
+
   // call the displayQuiz function
   displayQuiz();
 });
-document.getElementById("btnSubmit").addEventListener("click", function(){
-  document.getElementById('score').innerHTML=`Your Score is : ${score};`
-
-});
- 
+const submit = document.querySelector('#btnSubmit');
+  submit.addEventListener('click', calculateScore);
