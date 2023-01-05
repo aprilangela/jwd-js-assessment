@@ -111,18 +111,24 @@ window.addEventListener("DOMContentLoaded", () => {
          
         }
 
-        if (radioElement.checked && i==a) {
+        if (radioElement.checked) {
           // code for task 1 goes here
-            score++;
-        }
+         if(quizItem.a ==i){
+						score++;
+            console.log(score);
+        };
+        document.getElementById('score').innerHTML=`Your score is ${score}.`
       }
-    });
-    const scoreElement = document.querySelector('#score');
-    scoreElement.innerHTML = `Your score is ${score} points`;
-  };
+    }
+   });
+    
+    };
+  
+  
+  
 
   // call the displayQuiz function
   displayQuiz();
+
+  btnSubmit.addEventListener("click", calculateScore);
 });
-const submit = document.querySelector('#btnSubmit');
-  submit.addEventListener('click', calculateScore);
