@@ -115,7 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
           // code for task 1 goes here
          if(quizItem.a ==i){
 						score++;
-            console.log(score);
+           
         };
         document.getElementById('score').innerHTML=`Your score is ${score}.`
       }
